@@ -9,6 +9,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -22,6 +23,8 @@ import seedu.wife.logic.commands.CommandResult;
 import seedu.wife.logic.commands.exceptions.CommandException;
 import seedu.wife.logic.parser.exceptions.ParseException;
 import seedu.wife.ui.UiView;
+import javafx.scene.Node;
+import seedu.wife.ui.viewmodels.StringView;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -59,15 +62,19 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane resultDisplayPlaceholder;
 
+    private final String initialMessage;
+
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public MainWindow(Stage primaryStage, Logic logic) {
+    public MainWindow(Stage primaryStage, Logic logic, String message) {
         super(FXML, primaryStage);
 
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.initialMessage = message;
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -125,14 +132,19 @@ public class MainWindow extends UiPart<Stage> {
                 Color.valueOf("D9D9D9"), new CornerRadii(5), null)));
 
         resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-        resultDisplayPlaceholder.setBackground(new Background(new BackgroundFill(
-                Color.valueOf("D9D9D9"), new CornerRadii(5), null)));
+        uiView = new UiView(resultDisplay);
+        resultDisplay.place(StringView.from(initialMessage));
+        place(resultDisplayPlaceholder, resultDisplay);
+
 
         this.commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
         commandBoxPlaceholder.setBackground(new Background(new BackgroundFill(
                 Color.valueOf("D9D9D9"), new CornerRadii(5), null)));
+    }
+
+    private <T extends Node> void place(Pane target, UiPart<T> item) {
+        target.getChildren().add(item.getRoot());
     }
 
     /**

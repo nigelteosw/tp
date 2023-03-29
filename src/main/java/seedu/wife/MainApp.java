@@ -46,6 +46,8 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
 
+    private String initialMessage = "Welcome to WIFE!";
+
     @Override
     public void init() throws Exception {
         logger.info("=============================[ Initializing WIFE ]===========================");
@@ -168,7 +170,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting WIFE " + MainApp.VERSION);
-        ui.start(primaryStage);
+        ui.start(primaryStage, initialMessage);
     }
 
     @Override
