@@ -38,7 +38,7 @@ public class AddCommandTest {
         ModelStubAcceptingFoodAdded modelStub = new ModelStubAcceptingFoodAdded();
         Food validFood = new FoodBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validFood).execute(modelStub);
+        CommandResult<?> commandResult = new AddCommand(validFood).execute(modelStub);
 
         assertEquals(String.format(EXPECTED_SUCCESS_MESSAGE, validFood), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validFood), modelStub.foodAdded);
