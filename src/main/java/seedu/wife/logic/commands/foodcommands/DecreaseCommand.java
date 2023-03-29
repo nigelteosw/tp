@@ -57,7 +57,7 @@ public class DecreaseCommand extends Command {
         model.updateFilteredFoodList(PREDICATE_SHOW_ALL_FOODS);
         String feedbackToUser = String.format(MESSAGE_DECREASE_FOOD_SUCCESS, decreasedFood)
                 + " by " + decreaseFoodDescriptor.getQuantity();
-        return new CommandResult(feedbackToUser);
+        return CommandResult.from(feedbackToUser);
 
     }
 
