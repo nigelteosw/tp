@@ -18,7 +18,7 @@ public class ListTagCommand extends Command {
             + "You may do so with the createtag command.";
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult<String> execute(Model model) {
         requireNonNull(model);
         model.updateFilteredTagList(Model.PREDICATE_SHOW_ALL_TAGS);
         Object[] tags = model.getFilteredTagList().toArray();
@@ -28,7 +28,7 @@ public class ListTagCommand extends Command {
         if (tags.length == 0) {
             sb.append(MESSAGE_EMPTY_TAGS).append(System.lineSeparator());
             String emptyTags = sb.toString();
-            return new CommandResult(emptyTags);
+            return CommandResult.from(emptyTags);
         }
 
         sb.append(MESSAGE_SUCCESS);
@@ -41,6 +41,6 @@ public class ListTagCommand extends Command {
 
         String allTags = sb.toString();
 
-        return new CommandResult(allTags);
+        return CommandResult.from(allTags);
     }
 }

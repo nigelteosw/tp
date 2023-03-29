@@ -37,7 +37,7 @@ public class ViewCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult<Food> execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Food> lastShownList = model.getFilteredFoodList();
 
@@ -47,7 +47,7 @@ public class ViewCommand extends Command {
 
         Food foodToView = lastShownList.get(targetIndex.getZeroBased());
         model.viewFood(foodToView);
-        return new CommandResult(String.format(MESSAGE_VIEW_FOOD_SUCCESS, foodToView));
+        return CommandResult.from(foodToView);
     }
 
     @Override

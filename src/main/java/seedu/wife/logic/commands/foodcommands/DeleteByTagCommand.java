@@ -48,7 +48,7 @@ public class DeleteByTagCommand extends Command {
 
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult<String> execute(Model model) {
         requireNonNull(model);
         List<Food> foodList = List.copyOf(model.getFoodList());
         String deletedFoodSuccessMessage = MESSAGE_DELETE_FOOD_SUCCESS;
@@ -70,7 +70,7 @@ public class DeleteByTagCommand extends Command {
                 + TagUtil.tagsToString(targetTags);
         }
 
-        return new CommandResult(deletedFoodSuccessMessage);
+        return CommandResult.from(deletedFoodSuccessMessage);
     }
 
     @Override

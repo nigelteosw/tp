@@ -188,10 +188,10 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @see seedu.wife.logic.Logic#execute(String)
      */
-    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+    private CommandResult<?> executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            CommandResult commandResult = logic.execute(commandText);
-            logger.info("Result: " + commandResult.getFeedbackToUser());
+            CommandResult<?> commandResult = logic.execute(commandText);
+            logger.info("Result: " + commandResult.getOutput());
             uiView.viewFrom(commandResult);
 
             if (commandResult.isShowHelp()) {
@@ -206,7 +206,7 @@ public class MainWindow extends UiPart<Stage> {
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            uiView.viewFrom(e.getMessage());
             throw e;
         }
     }

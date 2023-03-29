@@ -46,14 +46,14 @@ public class ListByTagCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult<String> execute(Model model) {
         requireNonNull(model);
 
         model.updateFilteredFoodList(
             food -> food.getTags().stream().anyMatch(tag -> this.targetTags.contains(tag))
         );
 
-        return new CommandResult(
+        return CommandResult.from(
             TagUtil.getMatchStatus(
                 model.getFilteredFoodList(),
                 targetTags,

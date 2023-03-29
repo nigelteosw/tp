@@ -37,7 +37,7 @@ public class TagFoodCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult<String> execute(Model model) throws CommandException {
         Food foodToTag = TagFoodCommand.getFoodToTag(model, tag, index);
         Set<Tag> foodTags = foodToTag.getCurrentTags();
 
@@ -50,7 +50,7 @@ public class TagFoodCommand extends Command {
         Food editedFood = foodToTag.createNewFoodWithNewTags(foodToTag, foodTags);
         model.setFood(foodToTag, editedFood);
 
-        return new CommandResult(String.format(Messages.MESSAGE_SUCCESSFUL_FOOD_TAG,
+        return CommandResult.from(String.format(Messages.MESSAGE_SUCCESSFUL_FOOD_TAG,
                 editedFood.getName(), tag.getTagName()));
     }
 

@@ -37,7 +37,7 @@ public class UntagFoodCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult<String> execute(Model model) throws CommandException {
         requireNonNull(model);
         Food foodToUntag = UntagFoodCommand.getFoodToUntag(model, tag, index);
         Set<Tag> foodTags = foodToUntag.getCurrentTags();
@@ -50,7 +50,7 @@ public class UntagFoodCommand extends Command {
         Food editedFood = foodToUntag.createNewFoodWithNewTags(foodToUntag, foodTags);
         model.setFood(foodToUntag, editedFood);
 
-        return new CommandResult(String.format(Messages.MESSAGE_SUCCESSFUL_FOOD_UNTAG,
+        return CommandResult.from(String.format(Messages.MESSAGE_SUCCESSFUL_FOOD_UNTAG,
                  tag.getTagName(), editedFood.getName()));
     }
 

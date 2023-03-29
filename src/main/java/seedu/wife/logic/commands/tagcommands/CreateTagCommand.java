@@ -47,7 +47,7 @@ public class CreateTagCommand extends Command {
 
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult<String> execute(Model model) throws CommandException {
         requireNonNull(model);
         String messageString = MESSAGE_TAG_CREATE_SUCCESS;
 
@@ -64,7 +64,7 @@ public class CreateTagCommand extends Command {
             }
         }
 
-        return new CommandResult(messageString);
+        return CommandResult.from(messageString);
     }
 
     @Override

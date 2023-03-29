@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult<String> execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Food> lastShownList = model.getFilteredFoodList();
 
@@ -43,7 +43,7 @@ public class DeleteCommand extends Command {
 
         Food foodToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteFood(foodToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_FOOD_SUCCESS, foodToDelete));
+        return CommandResult.from(String.format(MESSAGE_DELETE_FOOD_SUCCESS, foodToDelete));
     }
 
     @Override

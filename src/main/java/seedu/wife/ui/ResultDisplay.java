@@ -3,7 +3,7 @@ package seedu.wife.ui;
 import static java.util.Objects.requireNonNull;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
+
 import javafx.scene.layout.Region;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
@@ -17,8 +17,6 @@ public class ResultDisplay extends UiPart<Region> {
 
     private static final String FXML = "ResultDisplay.fxml";
 
-    @FXML
-    private TextArea resultDisplay;
     @FXML 
     private ScrollPane scrollPane;
     @FXML 
@@ -26,11 +24,6 @@ public class ResultDisplay extends UiPart<Region> {
 
     public ResultDisplay() {
         super(FXML);
-    }
-
-    public void setFeedbackToUser(String feedbackToUser) {
-        requireNonNull(feedbackToUser);
-        resultDisplay.setText(feedbackToUser);
     }
 
     public void clear() {

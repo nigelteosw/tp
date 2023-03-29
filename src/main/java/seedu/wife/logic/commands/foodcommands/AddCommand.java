@@ -49,7 +49,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult<String> execute(Model model) throws CommandException {
         requireNonNull(model);
 
         if (model.hasFood(toAdd)) {
@@ -57,7 +57,7 @@ public class AddCommand extends Command {
         }
 
         model.addFood(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return CommandResult.from(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     @Override
