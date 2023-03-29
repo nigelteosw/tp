@@ -43,6 +43,8 @@ public class MainWindow extends UiPart<Stage> {
     private UiView uiView;
 
     @FXML
+    private CommandBox commandBox;
+    @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
@@ -127,15 +129,10 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplayPlaceholder.setBackground(new Background(new BackgroundFill(
                 Color.valueOf("D9D9D9"), new CornerRadii(5), null)));
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        this.commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
         commandBoxPlaceholder.setBackground(new Background(new BackgroundFill(
                 Color.valueOf("D9D9D9"), new CornerRadii(5), null)));
-
-        //      link enter button and change colour and corner radius
-        //      enterButton.onKeyPressedProperty().
-        //      enterButton.setBackground(new Background(new BackgroundFill(
-        //      Color.valueOf("006994"), new CornerRadii(5), null)));
     }
 
     /**
@@ -177,6 +174,11 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+    }
+
+    @FXML
+    private void handleUserInput() {
+        this.commandBox.handleUserInput();
     }
 
     public FoodListPanel getFoodListPanel() {

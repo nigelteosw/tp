@@ -2,15 +2,35 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
-
+DEVELOPER GUIDE FOR WIFE
+---
 --------------------------------------------------------------------------------------------------------------------
+## Introduction
+WIFE is a food inventory management system that aims to aid busy users in managing food items in their fridge. With its 
+inventory management system, users can easily edit their fridge's inventory and view it in a sleek and easy-to-read
+list. Users can also tag their food items according to their preferences. </br>
+
+This developer guide aims to provide detailed documentation for WIFE's design and implementation. This includes its 
+architecture, design choices as well outlines for all features of the software. This project is released under the MIT
+license, making it open source and available for anyone to use and modify.
 
 ## **Acknowledgements**
+WIFE is a brownfield software project developed at the School of Computing at National University of Singapore.
+It was adapted from a previous project called AddressBook Level-3, and it was developed as part of the CS2103T Software
+Engineering Module.
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source}
+Java dependencies:
+* [Jackson](https://github.com/FasterXML/jackson) for JSON-related operations
+* [JavaFX](https://openjfx.io/) for GUI
+* [JUnit 5](https://github.com/junit-team/junit5) for testing
 
+Documentation dependencies:
+* [Jekyll](https://jekyllrb.com/) for conversion of .md files to .html files for rendering of website
+* [PlantUML](https://plantuml.com/) for UML diagrams
+
+--------------------------------------------------------------------------------------------------------------------
+* Table of Contents
+  {:toc} 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -21,10 +41,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
+Below is a high-level view of how WIFE is structured, including its key components.
 
 ### Architecture
 
@@ -72,8 +89,9 @@ The sections below give more details of each component.
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
+*(Diagram to be updated)*
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -82,7 +100,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Food` object residing in the `Model`.
 
 ### Logic component
 
@@ -93,9 +111,9 @@ Here's a (partial) class diagram of the `Logic` component:
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `WifeParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to add a Food).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
@@ -110,7 +128,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `WifeParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `WifeParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -118,15 +136,17 @@ How the parsing works:
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
+*(Model Diagram to be updated)*
+
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores WIFE data i.e., all `Food` objects (which are contained in a `UniqueList` object).
+* stores the currently 'selected' `Food` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Food>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `WIFE`, which `Food` references. This allows `Wife` to only require one `Tag` object per unique tag, instead of each `Food` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -137,16 +157,18 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="550" /> 
+
+*(Model Diagram to be updated)*
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both WIFE data and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `WifeStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.wife.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -154,79 +176,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-## **Implementation**
-
-This section describes some noteworthy details on how certain features are implemented.
-
-### Item-related Features
-
 #### General Consideration Design
-
 The design of `Food` class follows closely to the original `Person` class in AB3, with some modifications made to fit
 the usage of WIFE.
 
@@ -234,6 +184,8 @@ the usage of WIFE.
 - Addition of individual tags storage for each item to store their associated `Tag`.
 
 All foods are stored in the `UniqueFoodList`.
+
+### Item-related Features
 
 #### Adding a Food
 
@@ -260,7 +212,7 @@ The second stage requires AddCommand#execute() to be called.
 
 The following sequence diagram shows how the `add` command.
 
-*insert sequence diagram*
+*(Sequence diagram to be inserted)*
 
 #### Editing a Food
 
@@ -292,9 +244,9 @@ The second stage requires EditCommand#execute() to be called.
 
 The following sequence diagram shows how the `add` command.
 
-*insert sequence diagram*
+*(Sequence diagram to be inserted)*
 
-#### \[Implementing\] Increase/Decrease quantity of a food item.
+#### Increase/Decrease quantity of a food item.
 
 **Overview**
 
@@ -329,9 +281,11 @@ if no quantity was specified. We realised it was intuitive for users to make the
 <div> Note: The implementation for `inc` and `dec` are the same, except the variable names and logic used to calculate 
 new quantity (Addition/Subtraction) The described implementation is for the `inc` command. </div>
 
+![IncreaseQuantitySequenceDiagram](images/IncreaseQuantitySequenceDiagram.png)
+
 The first stage of the implementation is parsing the user input to `IncreaseCommand`. `IncreaseCommandParser` is used
 to parse and check whether the user input is valid. After which a `IncreaseCommand` object is created along with a
-`IncreaseFoodDescriptor` instance to modify the current food item.
+`IncreaseFoodDescriptor` instance to increase the quantity of the current food item.
 
 The second stage requires IncreaseCommand#execute() to be called.
 
@@ -346,9 +300,9 @@ The second stage requires IncreaseCommand#execute() to be called.
    key in the command with a valid quantity.
 
 
-The following activity diagram shows the usage of the `inc` command.
+The following activity diagram summarizes what happens when a user executes a new `inc` command:
 
-**insert activity diagram
+![IncreaseQuantityActivityDiagram](images/IncreaseQuantityActivityDiagram.png)
 
 #### \[Implementing\] View details of a food item.
 
@@ -358,6 +312,8 @@ Traditionally, to view the details of an item, the user would use the list comma
 The user can now specify `view` to view more details of the indexed food item.
 
 The following UML diagram shows `view` and its associated class.
+
+*(UML diagram to be inserted)*
 
 **Design considerations**
 
@@ -394,17 +350,16 @@ view from the list view to the details view.
 
 The following activity diagram shows the usage of the `view` command.
 
-**insert activity diagram
+*(Actvity diagram to be inserted)*
 
-
-#### \[Implemented\] List Food by tag.
+#### List Food by tag.
 
 **Overview**
 The List by tag feature is meant to be a list all the food by the specified tags.
 
 The following UML diagram shows `Tag` and its associated class.
 
-*** insert uml
+*(UML diagram to be inserted)*
 
 **Design considerations**
 
@@ -421,8 +376,6 @@ The following UML diagram shows `Tag` and its associated class.
         * Parameter for multiple tag names must be checked that it is not empty
         * Users will have to use separate commands by `n/` which maybe a hassle
 
-_{more aspects and alternatives to be added}_
-
 **Implementation**
 The first stage of the implementation is parsing the user input to `ListByTagCommand`. `ListByTagCommandParser` is used
 to parse and check whether the user input is valid. After which a `ListByTagCommand` object is created with the specified
@@ -433,16 +386,57 @@ The second stage requires ListByTagCommand#execute() to be called.
 **Usage Scenario**
 
 1. The user specifies tags of the food item to be displayed.
-2. If the tag does not exist in `UniqueTagList`, an error response is returned and users will be prompted to key in the command with the valid tag name.
-3. If a valid tag is specified, the list indexed food item with the specified tags will be displayed.
-4. If the specific quantity is lesser than or equal to 0, an error response is returned and users will be prompted to
-   key in the command with a valid quantity.
+2. If no tag is specified, an error response is returned to prompt user to follow the command format.
+3. If the tag does not exist in `UniqueTagList`, an error response is returned and users will be prompted to key in the command with the valid tag name.
+4. If a valid tag is specified, the indexed food item with the specified tags will be displayed.
 
 The following activity diagram shows the usage of the `listbytag` command.
 
-**insert activity diagram
+*(Activity diagram to be inserted)*
 
-### \[Implemented\] Tag-related Features
+
+#### Delete Food by tag.
+
+**Overview**
+The delete by tag feature is meant to be delete all the food by the specified tags.
+
+The following UML diagram shows `Tag` and its associated class.
+
+*(UML diagram to be inserted)*
+
+**Design considerations**
+
+* **Alternative 1:** The command parameter will be the tag name of the food to delete
+    * Pros:
+        * Easily implemented. The command parameter will delete the food with the specified tag name
+    * Cons:
+        * May not be convenient for the user, as the command allows only 1 tag name at a time.
+
+* **Alternative 2 (Current implementation):** The command parameter will be the tag name of the food to delete.
+    * Pros:
+        * Convenient for the user to key in multiple tag names to display.
+    * Cons:
+        * Parameter for multiple tag names must be checked that it is not empty
+        * Users will have to use separate commands by `n/` which maybe a hassle
+
+**Implementation**
+The first stage of the implementation is parsing the user input to `DeleteByTagCommand`. `DeleteByTagCommandParser` is used
+to parse and check whether the user input is valid. After which a `DeleteByTagCommand` object is created with the specified tag name.
+
+The second stage requires DeleteByTagCommand#execute() to be called.
+
+**Usage Scenario**
+
+1. The user specifies tags of the food item to be delete.
+2. If no tag is specified, an error response is returned to prompt user to follow the command format.
+3. If the tag does not exist in `UniqueTagList`, an error response is returned and users will be prompted to key in the command with the valid tag name.
+4. If a valid tag is specified, the food item with the specified tags will be deleted.
+
+The following activity diagram shows the usage of the `delbytag` command.
+
+*(Activity diagram to be inserted)*
+
+### Tag-related Features
 
 #### Overview
 The tagging functionality is facilitated by the `UniqueTagList` stored in `WIFE`. Creating and deleting tags will
@@ -529,7 +523,7 @@ The first stage of the implementation is parsing the user input to `DeleteTagCom
 
 The following sequence diagram shows how the `deltag` command.
 
-**insert sequence diagram
+*(Sequence diagram to be inserted)*
 
 #### Tagging a Food
 
@@ -572,7 +566,9 @@ The first stage of the implementation is parsing the user input to `UntagCommand
 
 The sequence diagram of `untag` is similar to that of the `tag` command.
 
-### \[Implemented\] Dynamic Help
+*(Sequence diagram to be inserted)*
+
+### Dynamic Help
 
 ![HelpCommandActivityDiagram.png](images%2FHelpCommandActivityDiagram.png)
 
@@ -585,8 +581,6 @@ HelpMenu#parseCommand() — Parses the command input in `help COMMAND` to en
 These operations are invoked in `HelpCommandParser.java` which calls HelpMenu#getGeneralHelp() or HelpMenu#getCommandHelp() depending on the help command input after parsing the input with HelpMenu#parseCommand().
 
 #### Feature Details:
-
-<div/>
 
 Step 1. After successful retrieval of the help message, the message is passed to the `HelpCommand` object returned by `HelpCommandParser`.
 
@@ -615,7 +609,8 @@ Step 3. MainWindow#executeCommand() extracts the help message from the `CommandR
 * Fridge owner who cares about food waste and wish to track their fridge inventory.
 
 **Value proposition**:
-* The perfect solution to make sure you’re always one step ahead when managing your inventory, saving you time and money while reducing food waste.
+* The perfect solution to make sure you’re always one step ahead when managing your inventory, saving you time and 
+money while reducing food waste.
 
 
 ### User stories *to be edited*
@@ -624,21 +619,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                            | I want to …​                                          | So that I can…​                             |
 |----------|------------------------------------|-------------------------------------------------------|---------------------------------------------|
-| `* * *`  | user                               | add food items to my list                             | track what is in my fridge                  |
-| `* * *`  | meal planner                       | set expiration dates for items in my fridge           | plan meals around items that are expiring   |
-| `* * *`  | chef                               | set item categories for fridge items                  | easily find what I need when cooking.       |
-| `* * *`  | user                               | delete ingredients                                    | know what ingredients I have thrown away    |
-| `* *`    | user                               | layout items                                          | see where all my food items are             |
-| `* *`    | fridge owner                       | transfer my list to another system                    | use the same system with another fridge     |
-| `* *`    | user                               | search for specific food items                        | see whether I still have it in my fridge    |
-| `* *`    | user                               | leave comments on items                               | remember any particular remarks             |
-| `* *`    | user                               | attach images to items                                | remember what they look like                |
-| `* *`    | user who manages finances          | know how much is spent every month                    | track my monthly finances                   |
-| `* *`    | user who likes to try new products | rate the items                                        | know whether to buy the same item next time |
-| `* *`    | forgetful user                     | see past purchases                                    | remember what I have bought in the past     |
-| `* *`    | user                               | set reminders for items                               | remember to use them before they expire     |
-| `*`      | student                            | see recipes with the food in my fridge as ingredients | decide what meals I can make                |
-| `*`      | housewife                          | generate a grocery list                               | bring it to the supermarket                 |
+| `* * *`  | Organised user                     | add food items to my list                             | track what is in my fridge                  |
+| `* * *`  | Meal planner                       | set expiration dates for items in my fridge           | plan meals around items that are expiring   |
+| `* * *`  | Organised user                     | set item categories for fridge items                  | easily find what I need when cooking.       |
+| `* * *`  | Organised user                     | delete ingredients                                    | know what ingredients I have thrown away    |
+| `* *`    | Organised user                     | layout items                                          | see where all my food items are             |
+| `* *`    | Fridge owner                       | transfer my list to another system                    | use the same system with another fridge     |
+| `* *`    | Organised User                     | search for specific food items                        | see whether I still have it in my fridge    |
+| `* *`    | User with unique items             | leave comments on items                               | remember any particular remarks             |
+| `* *`    | User who likes visuals             | attach images to items                                | remember what they look like                |
+| `* *`    | User who manages finances          | know how much is spent every month                    | track my monthly finances                   |
+| `* *`    | User who likes to try new products | rate the items                                        | know whether to buy the same item next time |
+| `* *`    | Forgetful user                     | see past purchases                                    | remember what I have bought in the past     |
+| `* *`    | Forgetful user                     | set reminders for items                               | remember to use them before they expire     |
+| `*`      | User who likes to cook             | see recipes with the food in my fridge as ingredients | decide what meals I can make                |
+| `*`      | User who does grocery shopping     | generate a grocery list                               | bring it to the supermarket                 |
 
 *{More to be added}*
 
@@ -687,8 +682,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. WIFE is empty.
   * 1a1. WIFE displays a message that tells the User that there are no items and cannot delete specified item. <br/>
     Use case ends. 
-* 1b. User selects an item that does not exist.
-  * 1b1. WIFE displays a message that tells the User that specified item does not exist. <br/>
+* 1b. User selects an index that is more than the food items in WIFE.
+  * 1b1. WIFE displays a message that tells the User that the food item index provided is invalid. <br/>
     Use case ends.
 
 ### **Use case UC04: View help**
@@ -793,21 +788,75 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 The same as Use Case UC08: Increment the quantity of a food item, except that it is to decrease the quantity of a food 
 item.
 
+### **Use case UC10: List food items by tags**
+
+**MSS**
+
+1. User requests to view food items with specified tags.
+2. WIFE displays all the food items with the specified tags.
+   Use case ends.
+
+**Extensions**
+
+* 1a. User requests an invalid tag.
+    * 1a1. WIFE displays a message that tells the User that there are no food item tagged with the specified tag.
+      Use case ends.
+
+* 1b. The user specify valid and invalid tags togther.
+    * 1b1. WIFE displays food items with valid tags. It also tells User which tag is valid or invalid.
+      Use case ends.
+
+### **Use case UC11: Delete food items by tags**
+
+**MSS**
+
+1. User requests to delete food items with specified tags.
+2. WIFE deletes and displays all the food items with the specified tags.
+   Use case ends.
+
+**Extensions**
+
+* 1a. User requests an invalid tag.
+    * 1a1. WIFE displays a message that tells the User that there are no food item tagged with the specified tag to be deleted.
+      Use case ends.
+
+* 1b. The user specify valid and invalid tags togther.
+    * 1b1. WIFE deletes and displays food items with valid tags.
+      Use case ends.
+
+### **Use case UC12: Delete tags**
+
+**MSS**
+
+1. User requests to delete pre-defined tags in WIFE.
+2. WIFE deletes pre-defined tags in WIFE and untag itself from the food items. It then tells the users the tags that are deleted
+   Use case ends.
+
+**Extensions**
+
+* 1a. User requests an invalid tag.
+    * 1a1. WIFE displays a message that tells the User that the tag specified is does not exit in WIFE
+      Use case ends.
+
+* 1b. The user specify valid and invalid tags togther.
+    * 1b1. WIFE ignores invalid tags.
+      Use case resumes at step 2.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 food items without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Application’s dimension should be a minimum of 450 by 600 pixels.
 5.  Should support a minimum of 50 items in storage.
 6.  There should be no more than 1 second of lag when a user inputs a command.
 7.  A first-time user should be able to easily perform CRUD operations on items.
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X <br/>
 * **WIFE** - Well Informed Fridge Environment <br/>
+* **Main Success Scenario (MSS)** - The most straightforward interaction for a given use case with no errors. <br/>
 *{more to be added}*
 
 --------------------------------------------------------------------------------------------------------------------
@@ -838,17 +887,18 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person *[for reference]*
+### Deleting a Food Item
 
-1. Deleting a person while all persons are being shown
+1. Deleting a food while all foods are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all foods using the `list` command. Multiple foods in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First food item is deleted from the list. Details of the deleted food item shown in the status message.
+      Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No food item is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
