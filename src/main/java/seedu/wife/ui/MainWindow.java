@@ -21,6 +21,7 @@ import seedu.wife.logic.Logic;
 import seedu.wife.logic.commands.CommandResult;
 import seedu.wife.logic.commands.exceptions.CommandException;
 import seedu.wife.logic.parser.exceptions.ParseException;
+import seedu.wife.ui.UiView;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -39,6 +40,7 @@ public class MainWindow extends UiPart<Stage> {
     private FoodListPanel foodListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private UiView uiView;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -190,7 +192,7 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            uiView.viewFrom(commandResult);
 
             if (commandResult.isShowHelp()) {
                 helpWindow.setHelpMessage(commandResult.getHelpMessage());

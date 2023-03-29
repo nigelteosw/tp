@@ -1,4 +1,4 @@
-package view.viewmodels;
+package seedu.wife.ui.viewmodels;
 
 
 import javafx.scene.Node;
