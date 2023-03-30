@@ -134,17 +134,15 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         uiView = new UiView(resultDisplay);
         resultDisplay.place(StringView.from(initialMessage));
-        place(resultDisplayPlaceholder, resultDisplay);
+        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        resultDisplayPlaceholder.setBackground(new Background(new BackgroundFill(
+                Color.valueOf("D9D9D9"), new CornerRadii(5), null)));
 
 
         this.commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
         commandBoxPlaceholder.setBackground(new Background(new BackgroundFill(
                 Color.valueOf("D9D9D9"), new CornerRadii(5), null)));
-    }
-
-    private <T extends Node> void place(Pane target, UiPart<T> item) {
-        target.getChildren().add(item.getRoot());
     }
 
     /**
