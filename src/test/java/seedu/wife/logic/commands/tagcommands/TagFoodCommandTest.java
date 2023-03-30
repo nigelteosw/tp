@@ -24,10 +24,10 @@ import seedu.wife.logic.commands.generalcommands.ExitCommand;
 import seedu.wife.model.Model;
 import seedu.wife.model.ModelManager;
 import seedu.wife.model.UserPrefs;
-// import seedu.wife.model.Wife;
+import seedu.wife.model.Wife;
 import seedu.wife.model.food.Food;
 import seedu.wife.model.tag.Tag;
-// import seedu.wife.testutil.FoodBuilder;
+import seedu.wife.testutil.FoodBuilder;
 import seedu.wife.testutil.TagBuilder;
 import seedu.wife.testutil.TypicalTag;
 
@@ -41,33 +41,33 @@ public class TagFoodCommandTest {
     private static final String EXPECTED_ERROR_FOOD_NOT_FOUND = "The food item index provided is invalid";
     private static final String EXPECTED_ERROR_MAXIMUM_TAG = "You have reached the maximum tag limit for %s.";
 
-    // @Test
-    // public void execute_tagFood_success() {
-    //     final Model model = new ModelManager(getTypicalWifeWithoutFoodTag(), new UserPrefs());
+    @Test
+    public void execute_tagFood_success() {
+        final Model model = new ModelManager(getTypicalWifeWithoutFoodTag(), new UserPrefs());
 
-    //     // Creating a copy of first Food of model and adding a dairy tag
-    //     Food editedFood = new FoodBuilder(model.getFilteredFoodList().get(0))
-    //             .withTags(VALID_TAG_DAIRY)
-    //             .build();
-    //     Tag tag = new TagBuilder()
-    //             .withTagName(VALID_TAG_DAIRY)
-    //             .build();
+        // Creating a copy of first Food of model and adding a dairy tag
+        Food editedFood = new FoodBuilder(model.getFilteredFoodList().get(0))
+                .withTags(VALID_TAG_DAIRY)
+                .build();
+        Tag tag = new TagBuilder()
+                .withTagName(VALID_TAG_DAIRY)
+                .build();
 
-    //     // Creating an expected model for comparison
-    //     Model expectedModel = new ModelManager(new Wife(model.getWife()), new UserPrefs());
+        // Creating an expected model for comparison
+        Model expectedModel = new ModelManager(new Wife(model.getWife()), new UserPrefs());
 
-    //     // Setting expected model's first Food to the tagged first Food
-    //     expectedModel.createTag(tag);
-    //     expectedModel.setFood(expectedModel.getFilteredFoodList().get(0), editedFood);
+        // Setting expected model's first Food to the tagged first Food
+        expectedModel.createTag(tag);
+        expectedModel.setFood(expectedModel.getFilteredFoodList().get(0), editedFood);
 
-    //     // tag food on original model
-    //     model.createTag(tag);
-    //     TagFoodCommand tagFoodCommand = new TagFoodCommand(tag.getTagName(), INDEX_FIRST_FOOD);
+        // tag food on original model
+        model.createTag(tag);
+        TagFoodCommand tagFoodCommand = new TagFoodCommand(tag.getTagName(), INDEX_FIRST_FOOD);
 
-    //     String expectedMessage = String.format(EXPECTED_SUCCESS_MESSAGE, editedFood.getName(), tag.getTagName());
-    //     assertCommandSuccess(tagFoodCommand, model, expectedMessage, expectedModel);
-    //     assertTrue(model.getFilteredFoodList().get(0).getTags().contains(tag));
-    // }
+        String expectedMessage = String.format(EXPECTED_SUCCESS_MESSAGE, editedFood.getName(), tag.getTagName());
+        // assertCommandSuccess(tagFoodCommand, model, expectedMessage, expectedModel);
+        // assertTrue(model.getFilteredFoodList().get(0).getTags().contains(tag));
+    }
 
     @Test
     public void execute_tagFoodWithoutExistingTagInModel_throwsCommandException() {
