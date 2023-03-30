@@ -39,8 +39,8 @@ public class DeleteTagCommandTest {
         CommandResult<String> commandResult = new CommandResult<>(
             DeleteTagCommand.MESSAGE_TAG_DELETE_SUCCESS
             + "\n"
-            + TypicalTag.CHOCOLATE_TAG
-        , "", false, false, DeleteTagCommand.COMMAND_WORD);
+            + TypicalTag.CHOCOLATE_TAG,
+                "", false, false, DeleteTagCommand.COMMAND_WORD);
 
         assertEquals(commandResult, deleteTagCommand.execute(model));
     }

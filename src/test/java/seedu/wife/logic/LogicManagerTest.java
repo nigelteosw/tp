@@ -14,19 +14,19 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.wife.logic.commands.CommandResult;
 import seedu.wife.logic.commands.exceptions.CommandException;
-import seedu.wife.logic.commands.foodcommands.AddCommand;
+// import seedu.wife.logic.commands.foodcommands.AddCommand;
 import seedu.wife.logic.commands.foodcommands.ListCommand;
 import seedu.wife.logic.parser.exceptions.ParseException;
 import seedu.wife.model.Model;
 import seedu.wife.model.ModelManager;
 import seedu.wife.model.ReadOnlyWife;
 import seedu.wife.model.UserPrefs;
-import seedu.wife.model.food.Food;
-import seedu.wife.testutil.FoodBuilder;
+// import seedu.wife.model.food.Food;
+// import seedu.wife.testutil.FoodBuilder;
 import seedu.wife.storage.JsonUserPrefsStorage;
 import seedu.wife.storage.JsonWifeStorage;
 import seedu.wife.storage.StorageManager;
-import seedu.wife.logic.commands.CommandTestUtil;
+// import seedu.wife.logic.commands.CommandTestUtil;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -73,9 +73,9 @@ public class LogicManagerTest {
     //                new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
     //        StorageManager storage = new StorageManager(wifeStorage, userPrefsStorage);
     //        logic = new LogicManager(model, storage);
-    
     //        // Execute add command
-    //        String addCommand = AddCommand.COMMAND_WORD + CommandTestUtil.NAME_DESC_MEIJI + CommandTestUtil.UNIT_DESC_MEIJI + CommandTestUtil.QUANTITY_DESC_MEIJI
+    //        String addCommand = AddCommand.COMMAND_WORD + CommandTestUtil.NAME_DESC_MEIJI +
+    //          CommandTestUtil.UNIT_DESC_MEIJI + CommandTestUtil.QUANTITY_DESC_MEIJI
     //                + CommandTestUtil.EXPIRY_DATE_DESC_MEIJI;
     //        Food expectedFood = new FoodBuilder(MEIJI).build();
     //        ModelManager expectedModel = new ModelManager();
