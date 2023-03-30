@@ -33,6 +33,7 @@ public class ResultDisplay extends UiPart<Region> {
     public void place(Node item) {
         pane.getChildren().add(item);
         scrollPane.setContent(pane);
+        scrollPane.getStyleClass().add("result-display");
     }
 
 }

@@ -15,6 +15,7 @@ public class StringView {
         final Label text = new Label(stringToView);
 
         final VBox stringView = new VBox(text);
+        stringView.getStyleClass().add("pane-with-border");
 
         return stringView;
     }

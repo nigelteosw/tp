@@ -1,12 +1,18 @@
 package seedu.wife.ui.viewmodels;
 
 
+import java.util.Comparator;
+
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.control.Separator;
 import seedu.wife.model.food.Food;
+
+
 
 /**
  * A view of an {@code Item} that is used for displaying in the UI.
@@ -22,6 +28,8 @@ public class ItemView {
 	public static Node from(Food foodToView) {
 		// Name
 		final Label name = new Label(foodToView.getName().toString());
+        name.prefWidth(Double.MAX_VALUE);
+        name.setWrapText(true);
 
 		// Unit
 		final Label unit = new Label(foodToView.getUnit().toString());
@@ -30,22 +38,32 @@ public class ItemView {
 		final Label quantityLabel = new Label("Quantity Remaining: ");
 		final Label quantityValue = new Label(foodToView.getQuantity().toString());
 
-		// Expiry Date
-		final Label expiryDate = new Label(foodToView.getExpiryDate().toString());
-
 		// Tags
-		final Label tags = new Label(foodToView.getTags().toString());
+        final FlowPane tags = new FlowPane();
+        // add all tags with a styleclass to the flowpane from foodToView
+        foodToView.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.getTagName()))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.getTagName())));
+
+        // set styleclass for the flowpane
+        tags.getStyleClass().add("tags");
+        tags.setAlignment(Pos.CENTER_LEFT);
+        tags.setHgap(SPACING_UNIT);
+        tags.setVgap(SPACING_UNIT);
+
 
 		// Combine everything
         final Separator linedSeparator = new Separator();
         linedSeparator.getStyleClass().add("lined-separator");
         final VBox foodView = new VBox(
                 name,
+                new HBox(unit),
+                new Separator(),
                 new HBox(quantityLabel, quantityValue),
                 new Separator(),
                 new Label("Expiry Date: " + buildExpiryDateStringFrom(foodToView)),
                 new Separator(),
-				new Label("Tags: " + tags.getText()));
+				tags);
         foodView.setSpacing(SPACING_UNIT);
         return foodView;
 	}
