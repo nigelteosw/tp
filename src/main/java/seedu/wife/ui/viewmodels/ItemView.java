@@ -6,43 +6,39 @@ import java.util.Comparator;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.Separator;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.control.Separator;
 import seedu.wife.model.food.Food;
 
 
 
 /**
- * ItemView is a view of a Food that is used for displaying in the UI.
+ * A view of an {@code Item} that is used for displaying in the UI.
  */
 public class ItemView {
+	
+	private static final double SPACING_UNIT = 8.0;
 
-    private static final double SPACING_UNIT = 8.0;
+	private ItemView() {
+		// prevents instantiation
+	}
 
-    /*
-     * Prevents instantiation.
-     */
-    private ItemView() {}
-
-    /**
-     * Returns a Node that displays the foodToView.
-     */
-    public static Node from(Food foodToView) {
-        // Name
-        final Label name = new Label(foodToView.getName().toString());
+	public static Node from(Food foodToView) {
+		// Name
+		final Label name = new Label(foodToView.getName().toString());
         name.prefWidth(Double.MAX_VALUE);
         name.setWrapText(true);
 
-        // Unit
-        final Label unit = new Label(foodToView.getUnit().toString());
+		// Unit
+		final Label unit = new Label(foodToView.getUnit().toString());
 
-        // Quantity
-        final Label quantityLabel = new Label("Quantity Remaining: ");
-        final Label quantityValue = new Label(foodToView.getQuantity().toString());
+		// Quantity
+		final Label quantityLabel = new Label("Quantity Remaining: ");
+		final Label quantityValue = new Label(foodToView.getQuantity().toString());
 
-        // Tags
+		// Tags
         final FlowPane tags = new FlowPane();
         // add all tags with a styleclass to the flowpane from foodToView
         foodToView.getTags().stream()
@@ -56,7 +52,7 @@ public class ItemView {
         tags.setVgap(SPACING_UNIT);
 
 
-        // Combine everything
+		// Combine everything
         final Separator linedSeparator = new Separator();
         linedSeparator.getStyleClass().add("lined-separator");
         final VBox foodView = new VBox(
@@ -67,15 +63,15 @@ public class ItemView {
                 new Separator(),
                 new Label("Expiry Date: " + buildExpiryDateStringFrom(foodToView)),
                 new Separator(),
-                tags);
+				tags);
         foodView.setSpacing(SPACING_UNIT);
         return foodView;
-    }
+	}
 
-    /**
+	 /**
      * Builds the string representation of the item's quantity attached to its units.
      *
-     * @param foodToView the food whose quantity is to be formatted.
+     * @param item the item whose quantity is to be formatted.
      * @return the string representation of the item's quantity and units.
      */
     public static String buildItemQuantityAndUnitStringFrom(Food foodToView) {
@@ -86,11 +82,11 @@ public class ItemView {
     /**
      * Builds the string representation of the item's expiry date.
      *
-     * @param foodToView the food whose expiry date is to be formatted.
+     * @param item the item whose expiry date is to be formatted.
      * @return the string representation of the item's expiry date.
      */
     public static String buildExpiryDateStringFrom(Food foodToView) {
         return foodToView.getExpiryDate().toString();
     }
-
+  
 }
