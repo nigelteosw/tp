@@ -22,9 +22,9 @@ import seedu.wife.logic.Logic;
 import seedu.wife.logic.commands.CommandResult;
 import seedu.wife.logic.commands.exceptions.CommandException;
 import seedu.wife.logic.parser.exceptions.ParseException;
-import seedu.wife.ui.UiView;
 import javafx.scene.Node;
 import seedu.wife.ui.viewmodels.StringView;
+import seedu.wife.ui.UiView;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -206,7 +206,7 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult<?> commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getOutput());
-            uiView.viewFrom(commandResult);
+            uiView.viewFrom(commandResult.getOutput());
 
             if (commandResult.isShowHelp()) {
                 helpWindow.setHelpMessage(commandResult.getHelpMessage());

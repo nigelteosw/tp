@@ -19,10 +19,10 @@ public class SortByExpiryCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult<String> execute(Model model) {
         requireNonNull(model);
         model.sortFilteredFoodListByExpiryDate();
 
-        return new CommandResult(MESSAGE_SUCCESS);
+        return CommandResult.from(MESSAGE_SUCCESS);
     }
 }

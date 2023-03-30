@@ -23,7 +23,6 @@ public class ItemView {
 		// Name
 		final Label name = new Label(foodToView.getName().toString());
 
-
 		// Unit
 		final Label unit = new Label(foodToView.getUnit().toString());
 
