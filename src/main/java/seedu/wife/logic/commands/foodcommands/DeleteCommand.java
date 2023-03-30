@@ -43,7 +43,7 @@ public class DeleteCommand extends Command {
 
         Food foodToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteFood(foodToDelete);
-        return CommandResult.from(String.format(MESSAGE_DELETE_FOOD_SUCCESS, foodToDelete));
+        return CommandResult.from(String.format(MESSAGE_DELETE_FOOD_SUCCESS, foodToDelete), "");
     }
 
     @Override

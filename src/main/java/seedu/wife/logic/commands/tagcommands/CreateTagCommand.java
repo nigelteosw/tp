@@ -64,7 +64,7 @@ public class CreateTagCommand extends Command {
             }
         }
 
-        return CommandResult.from(messageString);
+        return CommandResult.from(messageString, "");
     }
 
     @Override

@@ -55,7 +55,7 @@ public class AddCommand extends Command {
         }
 
         model.addFood(toAdd);
-        return CommandResult.from(String.format(MESSAGE_SUCCESS, toAdd));
+        return CommandResult.from(String.format(MESSAGE_SUCCESS, toAdd), "");
     }
 
     @Override

@@ -23,6 +23,6 @@ public class SortByExpiryCommand extends Command {
         requireNonNull(model);
         model.sortFilteredFoodListByExpiryDate();
 
-        return CommandResult.from(MESSAGE_SUCCESS);
+        return CommandResult.from(MESSAGE_SUCCESS, "");
     }
 }

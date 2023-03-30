@@ -59,7 +59,7 @@ public class ListByTagCommand extends Command {
                 targetTags,
                 MESSAGE_SUCCESS,
                 MESSAGE_NO_FOOD_WITH_FOLLOWING_TAGS
-            )
-        );
+            ),
+        "");
     }
 }

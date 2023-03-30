@@ -74,7 +74,7 @@ public class DeleteTagCommand extends Command {
             throw new CommandException(MESSAGE_TAG_DELETE_UNSUCCESS);
         }
 
-        return CommandResult.from(deletedTagSuccessMessage);
+        return CommandResult.from(deletedTagSuccessMessage, "");
     }
 
     @Override

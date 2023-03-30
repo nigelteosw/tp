@@ -47,9 +47,9 @@ public class CommandResult<T> {
      * @param output the output to eventually display to the user.
      * @return a {@code CommandResult} that holds the output.
      */
-    public static <T> CommandResult<T> from(T output) {
+    public static <T> CommandResult<T> from(String feedbackToUser, T output) {
         requireNonNull(output);
-        return new CommandResult<T>("", output);
+        return new CommandResult<T>(feedbackToUser, output);
     }
 
     public T getOutput() {
@@ -57,7 +57,7 @@ public class CommandResult<T> {
     }
 
     public String getFeedbackToUser() {
-        return feedbackToUser;
+        return this.feedbackToUser;
     }
 
     public String getHelpMessage() {

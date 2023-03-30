@@ -20,6 +20,6 @@ public class ListCommand extends Command {
     public CommandResult<String> execute(Model model) {
         requireNonNull(model);
         model.updateFilteredFoodList(PREDICATE_SHOW_ALL_FOODS);
-        return CommandResult.from(MESSAGE_SUCCESS);
+        return CommandResult.from(MESSAGE_SUCCESS, "");
     }
 }

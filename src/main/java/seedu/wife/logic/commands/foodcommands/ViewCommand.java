@@ -47,7 +47,7 @@ public class ViewCommand extends Command {
 
         Food foodToView = lastShownList.get(targetIndex.getZeroBased());
         model.viewFood(foodToView);
-        return CommandResult.from(foodToView);
+        return CommandResult.from(MESSAGE_VIEW_FOOD_SUCCESS, foodToView);
     }
 
     @Override

@@ -58,7 +58,7 @@ public class TagFoodCommand extends Command {
         Food editedFood = foodToTag.createNewFoodWithNewTags(foodToTag, foodTags);
         model.setFood(foodToTag, editedFood);
 
-        return CommandResult.from(MESSAGE_SUCCESSFUL_FOOD_TAG);
+        return CommandResult.from(MESSAGE_SUCCESSFUL_FOOD_TAG, "");
     }
 
     @Override

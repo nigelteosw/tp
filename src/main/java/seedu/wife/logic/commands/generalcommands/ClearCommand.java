@@ -20,6 +20,6 @@ public class ClearCommand extends Command {
     public CommandResult<String> execute(Model model) {
         requireNonNull(model);
         model.setWife(new Wife());
-        return CommandResult.from(MESSAGE_SUCCESS);
+        return CommandResult.from(MESSAGE_SUCCESS, "");
     }
 }

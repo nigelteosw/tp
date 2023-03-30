@@ -51,7 +51,7 @@ public class UntagFoodCommand extends Command {
         model.setFood(foodToUntag, editedFood);
 
         return CommandResult.from(String.format(Messages.MESSAGE_SUCCESSFUL_FOOD_UNTAG,
-                 tag.getTagName(), editedFood.getName()));
+                 tag.getTagName(), editedFood.getName()), "");
     }
 
     @Override

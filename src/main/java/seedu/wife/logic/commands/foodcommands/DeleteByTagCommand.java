@@ -70,7 +70,7 @@ public class DeleteByTagCommand extends Command {
                 + TagUtil.tagsToString(targetTags);
         }
 
-        return CommandResult.from(deletedFoodSuccessMessage);
+        return CommandResult.from(deletedFoodSuccessMessage, "");
     }
 
     @Override

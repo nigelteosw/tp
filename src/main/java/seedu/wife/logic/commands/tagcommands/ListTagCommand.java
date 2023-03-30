@@ -28,7 +28,7 @@ public class ListTagCommand extends Command {
         if (tags.length == 0) {
             sb.append(MESSAGE_EMPTY_TAGS).append(System.lineSeparator());
             String emptyTags = sb.toString();
-            return CommandResult.from(emptyTags);
+            return CommandResult.from(emptyTags, "");
         }
 
         sb.append(MESSAGE_SUCCESS);
@@ -41,6 +41,6 @@ public class ListTagCommand extends Command {
 
         String allTags = sb.toString();
 
-        return CommandResult.from(allTags);
+        return CommandResult.from(allTags, "");
     }
 }
