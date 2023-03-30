@@ -2,8 +2,6 @@ package seedu.wife.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Objects;
-
 /**
  * Represents the result of a command execution.
  */
@@ -79,6 +77,6 @@ public abstract class CommandResult<T> {
     public boolean equals(Object obj) {
         // To be overridden by derived classes
         return false;
-    }    
+    }
 }
 

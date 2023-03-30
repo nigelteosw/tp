@@ -3,18 +3,31 @@ package seedu.wife.ui;
 import static java.util.Objects.requireNonNull;
 
 import seedu.wife.model.food.Food;
-import seedu.wife.ui.ResultDisplay;
-import seedu.wife.ui.viewmodels.StringView;
 import seedu.wife.ui.viewmodels.ItemView;
+import seedu.wife.ui.viewmodels.StringView;
 
+
+
+/**
+ * Represents the view of the UI.
+ */
 public class UiView {
     private final ResultDisplay display;
 
+    /**
+     * Constructs a UiView with the specified ResultDisplay.
+     * @param display the ResultDisplay to display the view.
+     */
     public UiView(ResultDisplay display) {
         this.display = display;
     }
 
-    public void viewFrom(Object object) throws AssertionError{
+    /**
+     * Displays the view of the object.
+     * @param object the object to display.
+     * @throws AssertionError if the object is not a Food or String.
+     */
+    public void viewFrom(Object object) throws AssertionError {
         requireNonNull(object);
         display.clear();
         if (object instanceof String) {

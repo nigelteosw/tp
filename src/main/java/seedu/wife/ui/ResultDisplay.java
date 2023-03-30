@@ -1,13 +1,11 @@
 package seedu.wife.ui;
 
-import static java.util.Objects.requireNonNull;
-
 import javafx.fxml.FXML;
-
-import javafx.scene.layout.Region;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+
 
 
 /**
@@ -17,9 +15,9 @@ public class ResultDisplay extends UiPart<Region> {
 
     private static final String FXML = "ResultDisplay.fxml";
 
-    @FXML 
+    @FXML
     private ScrollPane scrollPane;
-    @FXML 
+    @FXML
     private VBox pane;
 
     public ResultDisplay() {
@@ -30,9 +28,12 @@ public class ResultDisplay extends UiPart<Region> {
         pane.getChildren().clear();
     }
 
+    /**
+     * Places the item in the result display.
+     * @param item the item to be placed.
+     */
     public void place(Node item) {
         pane.getChildren().add(item);
         scrollPane.setContent(pane);
     }
-
 }
