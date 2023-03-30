@@ -9,7 +9,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -22,9 +21,7 @@ import seedu.wife.logic.Logic;
 import seedu.wife.logic.commands.CommandResult;
 import seedu.wife.logic.commands.exceptions.CommandException;
 import seedu.wife.logic.parser.exceptions.ParseException;
-import javafx.scene.Node;
 import seedu.wife.ui.viewmodels.StringView;
-import seedu.wife.ui.UiView;
 
 /**
  * The Main Window. Provides the basic application layout containing

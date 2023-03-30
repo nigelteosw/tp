@@ -16,35 +16,6 @@ public class ExitCommand extends Command {
 
     @Override
     public CommandResult<String> execute(Model model) {
-        return new CommandResult<String>() {
-            @Override
-            public String getOutput() {
-                return MESSAGE_EXIT_ACKNOWLEDGEMENT;
-            }
-
-            @Override
-            public boolean isExit() {
-                return true;
-            }
-
-            @Override
-            public boolean equals(Object other) {
-                if (other == this) {
-                    return true;
-                }
-                if (!(other instanceof CommandResult)) {
-                    return false;
-                }
-
-                CommandResult<?> asType = (CommandResult<?>) other;
-                try {
-                    return getOutput().equals(asType.getOutput())
-                            && super.equals(asType);
-                } catch (UnsupportedOperationException e) {
-                    return false;
-                }
-            }
-        };
+        return new CommandResult<String>(MESSAGE_EXIT_ACKNOWLEDGEMENT, "", false, true, COMMAND_WORD);
     }
-
 }

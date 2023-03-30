@@ -4,20 +4,43 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+
 /**
  * Represents the result of a command execution.
  */
-public abstract class CommandResult<T> {
+public class CommandResult<T> {
 
-    // private final String feedbackToUser;
+    private final String feedbackToUser;
 
-    // private final String helpMessage;
+    private final String helpMessage;
 
-    // /** Help information should be shown to the user. */
-    // private final boolean showHelp;
+    /** Help information should be shown to the user. */
+    private final boolean showHelp;
 
-    // /** The application should exit. */
-    // private final boolean exit;
+    /** The application should exit. */
+    private final boolean exit;
+
+    private final T output;
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, String helpMessage, boolean showHelp, boolean exit, T output) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.helpMessage = requireNonNull(helpMessage);
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.output = output;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, T output) {
+        this(feedbackToUser, "", false, false, output);
+    }
+
 
     /**
      * Constructs a {@code CommandResult} with the specified output.
@@ -26,59 +49,50 @@ public abstract class CommandResult<T> {
      */
     public static <T> CommandResult<T> from(T output) {
         requireNonNull(output);
-        return new CommandResult<>() {
-            @Override
-            public T getOutput() {
-                return output;
-            }
-
-            @Override
-            public boolean equals(Object other) {
-                if (other == this) {
-                    return true;
-                }
-                if (!(other instanceof CommandResult)) {
-                    return false;
-                }
-
-                CommandResult<?> asType = (CommandResult<?>) other;
-                try {
-                    return getOutput().equals(asType.getOutput())
-                            && super.equals(asType);
-                } catch (UnsupportedOperationException e) {
-                    return false;
-                }
-            }
-        };
+        return new CommandResult<T>("", output);
     }
 
-
     public T getOutput() {
-        throw new UnsupportedOperationException();
+        return output;
+    }
+
+    public String getFeedbackToUser() {
+        return feedbackToUser;
     }
 
     public String getHelpMessage() {
-        throw new UnsupportedOperationException();
+        return helpMessage;
     }
 
     public boolean isShowHelp() {
-        return false;
+        return showHelp;
     }
 
     public boolean isExit() {
-        return false;
-    }
-
-    protected boolean equals(CommandResult<?> other) {
-        // To be called by derived classes
-        return getHelpMessage() == other.getHelpMessage()
-                && isExit() == other.isExit();
+        return exit;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        // To be overridden by derived classes
-        return false;
-    }    
-}
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
 
+        // instanceof handles nulls
+        if (!(other instanceof CommandResult)) {
+            return false;
+        }
+
+        CommandResult otherCommandResult = (CommandResult) other;
+        return feedbackToUser.equals(otherCommandResult.feedbackToUser)
+                && helpMessage.equals(otherCommandResult.helpMessage)
+                && showHelp == otherCommandResult.showHelp
+                && exit == otherCommandResult.exit;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(feedbackToUser, helpMessage, showHelp, exit);
+    }
+
+}

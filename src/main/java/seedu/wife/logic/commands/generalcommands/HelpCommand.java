@@ -32,38 +32,7 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult<String> execute(Model model) {
-        return new CommandResult<>() {
-            @Override
-            public String getOutput() {
-                return SHOWING_HELP_MESSAGE;
-            }
-
-            @Override
-            public String getHelpMessage() {
-                assert helpMessage != null;
-                return helpMessage;
-            }
-
-            @Override
-            public boolean equals(Object other) {
-                if (other == this) {
-                    return true;
-                }
-                if (!(other instanceof CommandResult)) {
-                    return false;
-                }
-
-                CommandResult<?> asType = (CommandResult<?>) other;
-                try {
-                    return getOutput().equals(asType.getOutput())
-                            && getHelpMessage().equals(asType.getHelpMessage())
-                            && super.equals(asType);
-                } catch (UnsupportedOperationException e) {
-                    return false;
-                }
-            }
-
-        };
+        return new CommandResult<String>(SHOWING_HELP_MESSAGE, helpMessage, true, false, COMMAND_WORD);
     }
 
     @Override
