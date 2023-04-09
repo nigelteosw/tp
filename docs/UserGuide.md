@@ -10,38 +10,42 @@ refrigerator!
 
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
-  * [Quick Start](#quick-start)
-  * [Trying out your first command](#trying-out-your-first-command)
-  * [Features](#features)
-    * [Food-related features](#food-related-features)
-      * [Add a food](#add-a-food-add)
-      * [List all food](#list-all-food-items-list)
-      * [Edit a food](#edit-a-food-edit)
-      * [Find a food](#find-a-food-find)
-      * [Increase the quantity of a food](#increasing-the-quantity-of-a-food-inc)
-      * [Decrease the quantity of a food](#decreasing-the-quantity-of-a-food-dec)
-      * [Delete a food](#delete-a-food-delete)
-      * [Sort food by expiry date](#checking-expiry-of-food-items--expiry)
-    * [Tag-related features](#tag-related-features)
-      * [Create a tag](#create-a-new-tag-createtag)
-      * [Tag a food](#tag-a-food-tag)
-      * [Untag a food](#untag-a-food-untag)
-      * [List all tags](#list-all-tags-listtag)
-      * [Listing all foods by their tags](#listing-all-foods-by-their-tags--listbytag)
-      * [Delete foods by their tags](#delete-foods-by-their-tags--delbytag)
-      * [Delete tags](#delete-tags--deltag)
-    * [General features](#general-features)
-      * [Getting Help](#getting-help-help)
-      * [Clearing WIFE](#clearing-wife--clear)
-      * [Exit the program](#exit-the-program--exit)
-  * [Saving the data](#saving-the-data)
-  * [Editing the data file](#editing-the-data-file)
-  * [FAQ](#faq)
-  * [Command Summary](#command-summary)
-    * [Food Commands](#food-commands)
-    * [Tag Commands](#tag-commands)
-    * [General Commands](#general-commands)
-  * [Glossary](#glossary)
+- [USER GUIDE FOR WIFE](#user-guide-for-wife)
+- [Table of Contents](#table-of-contents)
+- [Quick start](#quick-start)
+- [Trying out your first command!](#trying-out-your-first-command)
+- [Features](#features)
+- [Food-related Features](#food-related-features)
+  - [Add a food: `add`](#add-a-food-add)
+  - [List all food items: `list`](#list-all-food-items-list)
+  - [Edit a food: `edit`](#edit-a-food-edit)
+  - [Find a food: `find`](#find-a-food-find)
+  - [Increasing the quantity of a food: `inc`](#increasing-the-quantity-of-a-food-inc)
+  - [Decreasing the quantity of a food: `dec`](#decreasing-the-quantity-of-a-food-dec)
+  - [Delete a food: `delete`](#delete-a-food-delete)
+  - [Checking expiry of food items : `expiry`](#checking-expiry-of-food-items--expiry)
+  - [View full name of food item : `view`](#view-full-name-of-food-item--view)
+- [Tag-related Features](#tag-related-features)
+  - [Create a new tag: `createtag`](#create-a-new-tag-createtag)
+  - [Tag a food: `tag`](#tag-a-food-tag)
+  - [Untag a food: `untag`](#untag-a-food-untag)
+  - [List all tags: `listtag`](#list-all-tags-listtag)
+  - [Listing all foods by their tag(s) : `listbytag`](#listing-all-foods-by-their-tags--listbytag)
+  - [Delete foods by their tag(s) : `delbytag`](#delete-foods-by-their-tags--delbytag)
+  - [Delete tag(s) : `deltag`](#delete-tags--deltag)
+- [General Features](#general-features)
+  - [Getting help: `help`](#getting-help-help)
+      - [List of COMMAND\_NAME](#list-of-command_name)
+  - [Clearing WIFE : `clear`](#clearing-wife--clear)
+  - [Exit the program : `exit`](#exit-the-program--exit)
+  - [Saving the data](#saving-the-data)
+  - [Editing the data file](#editing-the-data-file)
+- [FAQ](#faq)
+- [Command summary](#command-summary)
+  - [Food Commands](#food-commands)
+  - [Tag Commands](#tag-commands)
+  - [General Commands](#general-commands)
+- [Glossary](#glossary)
 
 --------------------------------------------------------------------------------------------------------------------
 ## Quick start
@@ -81,6 +85,7 @@ to execute it.
 You should see your food list be updated as such!
 
   ![Ui_updated](images/UG/Ui_updated.png)
+
 Congratulations, you just added your first item!
 
 To see what the command format means, you can refer to the [Features](#features) below for details of each command to maximise your productivity with WIFE.
@@ -121,8 +126,15 @@ To see what the command format means, you can refer to the [Features](#features)
 Add a new food into WIFE. (This is the command when you tried out your first command!)
 
 Format: `add n/NAME u/UNIT q/QUANTITY e/EXPIRY DATE`
-
-*All parameters must be present in the command. Date must be in the format of DD-MM-YYYY.
+Note:
+* All parameters must be present in the command. Date must be in the format of DD-MM-YYYY.
+* `UNIT` of the food item must have at most 10 characters.
+* `QUANTITY` of the food item **must be a positive integer** 1, 2, 3, …​
+* `QUANTITY` of the food item should be less than `1,000,000`.
+* `EXPIRY DATE` of the food item should be in the format `DD-MM-YYYY`. Examples of valid date format:
+  * 11-11-2025
+  * 07-04-2024
+* `EXPIRY DATE` of the new food should not be before the date of insertion.
 
 Example:
 
@@ -152,7 +164,13 @@ Edit food items in WIFE.
 
 Format: `edit INDEX [n/NAME] [u/UNIT] [q/QUANTITY] [e/EXPIRY DATE]`
 
-* Index must be a valid integer that refers to an an item currently in the fridge
+Note:
+* `INDEX` must be a valid integer that refers to an item currently in the fridge.
+* `QUANTITY` of the food item should be less than `1,000,000`.
+* `EXPIRY DATE` of the food item should be in the format `DD-MM-YYYY`. Examples of valid date format:
+  * 11-11-2025
+  * 07-04-2024
+* `EXPIRY DATE` of the edited food should not be before the date of insertion.
 
 Example: <br/>
 `edit 1 n/Cauliflower q/20` returns
@@ -178,11 +196,12 @@ Increases the quantity of a food item in WIFE.
 
 Format: `inc INDEX [q/QUANTITY]`
 
+Note:
 * Increases the quantity of the food item at the specified `INDEX`.
-* The index refers to the index number shown in the displayed food item list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* If no quantity is specified, the default quantity to increase is 1.
-* If a quantity is specified, it **must be a positive integer** 1, 2, 3, …​
+* The `INDEX` refers to the index number shown in the displayed food item list.
+* The `INDEX` **must be a positive integer** 1, 2, 3, …​
+* If no `QUANTITY` is specified, the default `QUANTITY` to increase is 1.
+* If a `QUANTITY` is specified, it **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 
@@ -206,7 +225,8 @@ Format: `dec INDEX [q/QUANTITY]`
 
 Usage is the same as `inc`, with the only difference is being to decrease the quantity of the Food item.
 
-* The quantity specified to decrease by **cannot be equal to or greater than** the current quantity of the food item.
+Note:
+* The `QUANTITY` specified to decrease by **cannot be equal to or greater than** the current quantity of the food item.
 If you wish to delete the item, please use the `delete` command!
 
 ### Delete a food: `delete`
@@ -215,9 +235,10 @@ Deletes the specified food item from WIFE.
 
 Format: `delete INDEX`
 
+Note:
 * Deletes the food item at the specified `INDEX`.
-* The index refers to the index number shown in the displayed food item list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The `INDEX` refers to the index number shown in the displayed food item list.
+* The `INDEX` **must be a positive integer** 1, 2, 3, …​
 
 Result:
 
@@ -242,6 +263,20 @@ Examples:
 Food items are being sorted by their expiry dates.
 ```
 
+### View the full name of a food item : `view`
+
+Displays the full name of the food item. This is useful when the food item name is too long to be displayed in the
+food list.
+
+Format: `view INDEX`
+
+Examples:
+
+`view 1` returns
+```shell
+Viewed Food: Broccoli (expires on: 03-03-2033)
+```
+
 ## Tag-related Features
 
 ### Create a new tag: `createtag`
@@ -249,7 +284,14 @@ Food items are being sorted by their expiry dates.
 Creates a new pre-defined tag in WIFE.
 
 Format: `createtag n/TAG NAME [n/TAG NAME]...`
+
+Note:
 * `TAG NAME` has a maximum limit of **15 characters**.
+* `TAG NAME` is case-insensitive and two tags with the same name will be classified as duplicates.
+* If in the case where any of the tags (but not all) already exists in WIFE, the non-duplicate tags will be created. 
+  However, if all of the tags being declared already exist in WIFE, WIFE will return an error response to prevent 
+  the creation of duplicate tags.
+
 Example:
 `createtag n/Stir Fry n/Soup` displays
 ```markdown
@@ -270,9 +312,13 @@ Pre-Defined Tags:
 * `Dairy`
 
 Format: `tag INDEX n/TAG NAME`
-* Each food item can have a maximum of 4 tags.
-* Only one tag can be tagged to a food item per command
-* Index refers to any number on the food item list and must be a positive number, i.e., 1, 2, 3, 4, …
+
+Note:
+* Each food item can have a maximum of **4** tags.
+* Only one tag can be tagged to a food item per command.
+* `TAG NAME` must be a valid tag created in WIFE. List of tags available can easily be checked 
+* using the [`listtag`](#list-all-tags-listtag) command.
+* `INDEX` refers to any number on the food item list and must be a positive number, i.e., 1, 2, 3, 4, …
 
 Example: <br/>
 `tag 2 n/Stir Fry` returns
@@ -287,9 +333,10 @@ Kai Lan successfully tagged with Stir Fry
 Remove a tag from a specified food item in your fridge.
 
 Format: `untag INDEX n/TAG NAME`
-* Remove `Tag Name` from the food item with index `Index`
-* Only one tag can be from a food item per command
-* Index refers to any number on the food item list and must be a positive number, i.e., 1, 2, 3, 4, …
+* Remove `TAG NAME` from the food item with index `INDEX`.
+* `TAG NAME` must be an existing tag of the selected food item.
+* Only one tag can be removed from a food item per command.
+* `INDEX` refers to any number on the food item list and must be a positive number, i.e., 1, 2, 3, 4, …
 
 Example:
 `untag 2 n/Stir Fry` returns
@@ -378,6 +425,7 @@ Format: `help [COMMAND_NAME]` where `COMMAND_NAME` may be omitted to view genera
   * add
   * list
   * edit
+  * view
   * find
   * inc
   * dec
@@ -466,6 +514,7 @@ There is no support for mobile devices yet.
 |---------------------|------------------------------------------|-------------------------------------------------------------|-------------------------------------------|
 | Add                 | Adds a food item to the food list        | `add n/NAME u/UNIT q/QUANTITY e/EXPIRY DATE`                | `add n/Coca Cola u/Cans q/5 e/01-01-2099` |
 | List                | Lists all food items                     | `list`                                                      | `list`                                    |
+| View                | View a food item                         | `view INDEX`                                                | `view 1`                                  |
 | Edit                | Edits a food item                        | `edit INDEX [n/NAME] [u/UNIT] [q/QUANTITY] [e/EXPIRY DATE]` | `edit 1 n/Cauliflower q/20`               |
 | Find                | Finds a food item                        | `find KEYWORD [KEYWORD]...`                                 | `find Broccoli`                           |
 | Increase            | Increases the quantity of a food item    | `inc INDEX [q/QUANTITY]`                                    | `inc 1 q/100`                             |
@@ -499,6 +548,9 @@ There is no support for mobile devices yet.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
-
-* **GUI:** Graphical User Interface - It is the view of the application that you see!
+* **Command Terminal** The typing interface that you use in WIFE. You can open a separate command terminal on your operating
+system for installation purposes.
 * **Destructive Command:** It will wipe out all current data in WIFE.
+*  **Extraneous parameters**  Additional parameters for a command that are not needed or unnecessary.
+* **GUI:** Graphical User Interface - It is the view of the application that you see!
+* **Home Folder** The working folder that `wife.jar` is currently located in.
