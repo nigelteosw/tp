@@ -2,42 +2,39 @@
 layout: page
 title: User Guide
 ---
-USER GUIDE FOR WIFE
----
+## Introduction 
+
 Enhance life with WIFE! Our product Well Informed Fridge Environment &lt;WIFE/&gt; helps users to manage their
 items in the fridge. With this, one never has to worry about optimizing storage and organization of food items in their
 refrigerator!
 
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
-- [USER GUIDE FOR WIFE](#user-guide-for-wife)
-- [Table of Contents](#table-of-contents)
 - [Quick start](#quick-start)
 - [Trying out your first command!](#trying-out-your-first-command)
 - [Features](#features)
 - [Food-related Features](#food-related-features)
-  - [Add a food: `add`](#add-a-food-add)
-  - [List all food items: `list`](#list-all-food-items-list)
-  - [Edit a food: `edit`](#edit-a-food-edit)
-  - [Find a food: `find`](#find-a-food-find)
-  - [Increasing the quantity of a food: `inc`](#increasing-the-quantity-of-a-food-inc)
-  - [Decreasing the quantity of a food: `dec`](#decreasing-the-quantity-of-a-food-dec)
-  - [Delete a food: `delete`](#delete-a-food-delete)
-  - [Checking expiry of food items : `expiry`](#checking-expiry-of-food-items--expiry)
-  - [View full name of food item : `view`](#view-full-name-of-food-item--view)
+  - [Add a food item: `add`](#add-a-food-item-add)
+  - [List all food item: `list`](#list-all-food-items-list)
+  - [Edit a food item: `edit`](#edit-a-food-item-edit)
+  - [Find a food item: `find`](#find-a-food-item-find)
+  - [Increasing the quantity of a food item: `inc`](#increasing-the-quantity-of-a-food-inc)
+  - [Decreasing the quantity of a food item: `dec`](#decreasing-the-quantity-of-a-food-dec)
+  - [Delete a food item: `delete`](#delete-a-food-delete)
+  - [Checking expiry of food items: `expiry`](#checking-expiry-of-food-items--expiry)
+  - [View a food item: `view`](#view-the-full-name-of-a-food-item--view)
 - [Tag-related Features](#tag-related-features)
   - [Create a new tag: `createtag`](#create-a-new-tag-createtag)
-  - [Tag a food: `tag`](#tag-a-food-tag)
-  - [Untag a food: `untag`](#untag-a-food-untag)
+  - [Tag a food item: `tag`](#tag-a-food-item-tag)
+  - [Untag a food item: `untag`](#untag-a-food-item-untag)
   - [List all tags: `listtag`](#list-all-tags-listtag)
-  - [Listing all foods by their tag(s) : `listbytag`](#listing-all-foods-by-their-tags--listbytag)
-  - [Delete foods by their tag(s) : `delbytag`](#delete-foods-by-their-tags--delbytag)
-  - [Delete tag(s) : `deltag`](#delete-tags--deltag)
+  - [Listing all food items by their tag(s): `listbytag`](#listing-all-foods-by-their-tags--listbytag)
+  - [Delete food items by their tag(s): `delbytag`](#delete-food-items-by-their-tags--delbytag)
+  - [Delete tag(s): `deltag`](#delete-tags--deltag)
 - [General Features](#general-features)
   - [Getting help: `help`](#getting-help-help)
-      - [List of COMMAND\_NAME](#list-of-command_name)
-  - [Clearing WIFE : `clear`](#clearing-wife--clear)
-  - [Exit the program : `exit`](#exit-the-program--exit)
+  - [Clearing WIFE: `clear`](#clearing-wife--clear)
+  - [Exit the program: `exit`](#exit-the-program--exit)
   - [Saving the data](#saving-the-data)
   - [Editing the data file](#editing-the-data-file)
 - [FAQ](#faq)
@@ -57,15 +54,13 @@ refrigerator!
 3. Double-click on the application to run WIFE!
 
 <div markdown="block" class="alert alert-info">
-
 If double-clicking the application does not work:
   * Copy the file to the folder you want to use as the _home folder_ for your WIFE.
-  * Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar wife.jar` command to run the application.<br>
-
+  * Open a command terminal, `cd` into the folder you put `wife.jar` in, and use the following command to run the application.<br>
+  `java -jar wife.jar` 
 </div>
 
-
-A GUI similar to the below should appear in a few seconds.
+A _GUI_ similar to the below should appear in a few seconds.
    ![Ui](images/UG/Ui_current.png)
 The main application consists of 3 components, namely:
 * Food List
@@ -75,16 +70,16 @@ The main application consists of 3 components, namely:
 --------------------------------------------------------------------------------------------------------------------
 ## Trying out your first command!
 Not sure how to start? Don't worry, let's start out with a simple command as an example using the sample data
-provided WIFE when you first start up. 
+provided in WIFE when you first start up. 
 
-* Type the following command in the user input box at the bottom of WIFE and press 'Enter' on your keyboard
-to execute it.
+* Type the following command in the user input box at the bottom of WIFE and press the "Enter" button beside it. (You can 
+also press "Enter" on your keyboard!)
   
   `add n/Coca Cola u/Cans q/5 e/01-01-2099`
 
-You should see your food list be updated as such!
+You should see the Food List be updated as such.
 
-  ![Ui_updated](images/UG/Ui_updated.png)
+  ![Ui_updated](images/UG/AddFood.png)
 
 Congratulations, you just added your first item!
 
@@ -99,42 +94,41 @@ To see what the command format means, you can refer to the [Features](#features)
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Meiji Milk`.
+* Words in `UPPER_CASE` are the parameters to be supplied by you, the user!<br>
+  e.g. In `add n/NAME`, `NAME` is a parameter which can be used as `add n/Meiji Milk`.
 
   * Items in square brackets are optional.<br>
-    e.g `inc INDEX [q/QUANTITY]` can be used as `inc 1 q/10` or as `inc 1`.
+    e.g. `inc INDEX [q/QUANTITY]` can be used as `inc 1 q/10` or as `inc 1`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+* Items with `…`​ after them can be used multiple times, including zero times.<br>
   e.g. `[t/TAG NAME]…​` can be used as ` ` (i.e. 0 times), `t/Vegetables`, `t/Fresh` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME u/UNIT`, `u/UNIT n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `n/item1 n/item2`, only `n/item2` will be taken.
+* If a parameter is expected only **once** in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+  e.g. In `tag INDEX n/TAG NAME`, if you specify `tag 1 n/item 1 n/item 2`, only `n/item2` will be tagged to that food item.
 
-* Extraneous parameters for commands that do not take in parameters (such as `list`, `exit` and `clear`) will be ignored.<br>
+* _Extraneous parameters_ for commands that do not take in parameters (such as `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `list 123`, it will be interpreted as `list`.
-
 </div>
 
 
 ## Food-related Features
 
-### Add a food: `add`
-Add a new food into WIFE. (This is the command when you tried out your first command!)
+### Add a food item: `add`
+Adds a new food item into WIFE. (This is the command when you tried out your first command!)
 
 Format: `add n/NAME u/UNIT q/QUANTITY e/EXPIRY DATE`
+
 Note:
-* All parameters must be present in the command. Date must be in the format of DD-MM-YYYY.
-* `UNIT` of the food item must have at most 10 characters.
-* `QUANTITY` of the food item **must be a positive integer** 1, 2, 3, …​
-* `QUANTITY` of the food item should be less than `1,000,000`.
+* All parameters must be present in the command.
+* `UNIT` of the food item must have at most **10 characters**
+* `QUANTITY` of the food item **must be a positive integer** 1, 2, 3, …​ and it should be less than `1,000,000`.
 * `EXPIRY DATE` of the food item should be in the format `DD-MM-YYYY`. Examples of valid date format:
   * 11-11-2025
   * 07-04-2024
-* `EXPIRY DATE` of the new food should not be before the date of insertion.
+* `EXPIRY DATE` of the food item should not be before the date of insertions
 
 Example:
 
@@ -145,9 +139,12 @@ New food added: Coca Cola (expires on: 01-01-2099)
 
 ![AddFood](images/UG/AddFood.png)
 
+<div style="page-break-after: always;"></div>
+
+
 ### List all food items: `list`
 
-Shows a list of all food item in WIFE.
+Shows a list of all food items in WIFE.
 
 Format: `list`
 
@@ -158,37 +155,44 @@ Example:
   Listed all food items!
 ```
 
-### Edit a food: `edit`
+![ListFoods](images/UG/ListFoods.png)
 
-Edit food items in WIFE.
+
+### Edit a food item: `edit`
+
+Edits a food item in WIFE.
 
 Format: `edit INDEX [n/NAME] [u/UNIT] [q/QUANTITY] [e/EXPIRY DATE]`
 
 Note:
-* `INDEX` must be a valid integer that refers to an item currently in the fridge.
-* `QUANTITY` of the food item should be less than `1,000,000`.
-* `EXPIRY DATE` of the food item should be in the format `DD-MM-YYYY`. Examples of valid date format:
+* `INDEX` must be a valid integer that refers to an item currently in the fridge
+* `QUANTITY` of the edited food item should be less than `1,000,000`
+* `EXPIRY DATE` of the edited food item should be in the format `DD-MM-YYYY`. Examples of valid date format:
   * 11-11-2025
   * 07-04-2024
-* `EXPIRY DATE` of the edited food should not be before the date of insertion.
+* `EXPIRY DATE` of the edited food should not be before the date of insertion
 
 Example: <br/>
-`edit 1 n/Cauliflower q/20` returns
+`edit 1 n/Chocolate Milk q/20 e/06-06-2030` returns
 ```markdown
-Edited food item: Cauliflower (expires on: 03-04-2033)
+Edited food item: Chocolate milk (expires on: 06-06-2030)
 ```
 
-### Find a food: `find`
+![EditFood](images/UG/EditFood.png)
 
-Find food items in WIFE which names contain any of the specified keywords. Keywords are case-insensitive.
+### Find a food item: `find`
+
+Find food items in WIFE which names contain **any of the specified keywords**. Keywords are case-insensitive.
 
 Format: `find KEYWORD [KEYWORD]...`
 
 Example: <br/>
-`find Broccoli` returns
+`find choc` returns
 ```markdown
 1 food item(s) found!
 ```
+
+![FindFood](images/UG/FindFood.png)
 
 ### Increasing the quantity of a food: `inc`
 
@@ -197,24 +201,27 @@ Increases the quantity of a food item in WIFE.
 Format: `inc INDEX [q/QUANTITY]`
 
 Note:
-* Increases the quantity of the food item at the specified `INDEX`.
-* The `INDEX` refers to the index number shown in the displayed food item list.
+* Ensure you can see the whole list of food items (using `list`) before using this command!
+* Increases the quantity of the food item at the specified `INDEX`
+* The `INDEX` refers to the index number shown in the Food List
 * The `INDEX` **must be a positive integer** 1, 2, 3, …​
 * If no `QUANTITY` is specified, the default `QUANTITY` to increase is 1.
 * If a `QUANTITY` is specified, it **must be a positive integer** 1, 2, 3, …​
+* The final `QUANTITY` of the edited food item should be less than `1,000,000`
+
 
 Examples:
 
-`inc 2` returns
+`inc 1` returns
 ```markdown
-  Increased Food: Kai Lan (expires on: 03-03-2033) by 1
+  Increased Food: Chocolate Milk (expires on: 06-06-2030) by 1
 ```
 ![IncreaseFood](images/UG/IncreaseFood.png)
 
 `inc 1 q/100` returns
 
 ```markdown
-  Increased Food: Kai Lan (expires on: 03-03-2033) by 100
+  Increased Food: Chocolate Milk (expires on: 06-06-2030) by 100
 ```
 
 ### Decreasing the quantity of a food: `dec`
@@ -223,7 +230,7 @@ Decreases the quantity of a food item in WIFE.
 
 Format: `dec INDEX [q/QUANTITY]`
 
-Usage is the same as `inc`, with the only difference is being to decrease the quantity of the Food item.
+Usage is the same as `inc`, with the only difference is being to decrease the quantity of the food item.
 
 Note:
 * The `QUANTITY` specified to decrease by **cannot be equal to or greater than** the current quantity of the food item.
@@ -237,14 +244,14 @@ Format: `delete INDEX`
 
 Note:
 * Deletes the food item at the specified `INDEX`.
-* The `INDEX` refers to the index number shown in the displayed food item list.
+* The `INDEX` refers to the index number shown in the displayed Food List.
 * The `INDEX` **must be a positive integer** 1, 2, 3, …​
 
 Result:
 
-`delete 3` returns
+`delete 1` returns
 ```markdown
-Deleted Food: MEIJI MILK (expires on 05-04-2023)
+Deleted Food: Chocolate Milk (expires on 06-06-2030)
 ```
 
 ![DeleteFood](images/UG/DeleteFood.png)
@@ -274,8 +281,10 @@ Examples:
 
 `view 1` returns
 ```shell
-Viewed Food: Broccoli (expires on: 03-03-2033)
+Viewed Food: Coca Cola (expires on: 01-01-2099)
 ```
+
+![ViewFood](images/UG/ViewFood.png)
 
 ## Tag-related Features
 
@@ -286,27 +295,27 @@ Creates a new pre-defined tag in WIFE.
 Format: `createtag n/TAG NAME [n/TAG NAME]...`
 
 Note:
+* `TAG NAME` can only contains **letter characters** and cannot be left blank.
 * `TAG NAME` has a maximum limit of **15 characters**.
 * `TAG NAME` is case-insensitive and two tags with the same name will be classified as duplicates.
-* If in the case where any of the tags (but not all) already exists in WIFE, the non-duplicate tags will be created. 
-  However, if all of the tags being declared already exist in WIFE, WIFE will return an error response to prevent 
-  the creation of duplicate tags.
+* In the case where any of the tags (but not all) already exists in WIFE, only the non-duplicate tags will be created. 
+* If all the tags being declared already exist in WIFE, an error response will be returned.
 
 Example:
-`createtag n/Stir Fry n/Soup` displays
+`createtag n/Fizzy n/Soup` displays
 ```markdown
 Tag(s) successfully created:
-Stir Fry
+Fizzy
 Soup
 ```
 
 ![CreateTag](images/UG/CreateTag.png)
 
-### Tag a food: `tag`
+### Tag a food item: `tag`
 
-Tag the specified food item in your fridge with our pre-defined tags.
+Tag the specified food item in WIFE with an existing tag.
 
-Pre-Defined Tags:
+Pre-Defined Tags (These tags already exist when you start up the application):
 * `New`
 * `Used`
 * `Dairy`
@@ -314,34 +323,41 @@ Pre-Defined Tags:
 Format: `tag INDEX n/TAG NAME`
 
 Note:
+* Restrictions posed on `Tag` can be referenced from [`createtag`](#create-a-new-tag-createtag).
 * Each food item can have a maximum of **4** tags.
-* Only one tag can be tagged to a food item per command.
+
+* Only **one tag** can be tagged to a food item per command.
 * `TAG NAME` must be a valid tag created in WIFE. List of tags available can easily be checked 
-* using the [`listtag`](#list-all-tags-listtag) command.
+  using the [`listtag`](#list-all-tags-listtag) command.
 * `INDEX` refers to any number on the food item list and must be a positive number, i.e., 1, 2, 3, 4, …
 
 Example: <br/>
-`tag 2 n/Stir Fry` returns
+`tag 1 n/new` returns
 ```markdown
-Kai Lan successfully tagged with Stir Fry
+Coca Cola successfully tagged with New
+```
+`tag 1 n/Fizzy` returns
+```markdown
+Coca Cola successfully tagged with Fizzy
 ```
 
 ![TagFood](images/UG/TagFood.png)
 
-### Untag a food: `untag`
+### Untag a food item: `untag`
 
-Remove a tag from a specified food item in your fridge.
+Removes a tag from a specified food item in WIFE.
 
 Format: `untag INDEX n/TAG NAME`
 * Remove `TAG NAME` from the food item with index `INDEX`.
 * `TAG NAME` must be an existing tag of the selected food item.
 * Only one tag can be removed from a food item per command.
-* `INDEX` refers to any number on the food item list and must be a positive number, i.e., 1, 2, 3, 4, …
+* The `INDEX` refers to the index number shown in the displayed Food List.
+* The `INDEX` **must be a positive integer** 1, 2, 3, …​
 
 Example:
-`untag 2 n/Stir Fry` returns
+`untag 1 n/new` returns
 ```markdown
-Stir Fry successfully untagged from Kai Lan
+New successfully untagged from Coca Cola
 ```
 
 ![UntagFood](images/UG/UntagFood.png)
@@ -356,10 +372,14 @@ Example:
 `listtag` displays
 ```
 Here are your existing tags: 
+New
+Used
 Dairy
-Meat
-Vegetables
+Soup
+Fizzy
 ```
+
+![ListTag](images/UG/ListTag.png)
 
 ### Listing all foods by their tag(s) : `listbytag`
 Shows a list of all food item in WIFE by specified tag(s).
@@ -369,17 +389,16 @@ Format: `listbytag n/TAG NAME [n/TAG NAME]...`
 
 Example:
 
-`listbytag n/Vegetables n/Healthy` returns
+`listbytag n/Fizzy` returns
 
 ```markdown
 Listed all food with the following tags:
-[Vegetables]
-[Healthy]
+[Fizzy]
 ```
 
 ![ListByTag](images/UG/ListByTag.png)
 
-### Delete foods by their tag(s) : `delbytag`
+### Delete food items by their tag(s) : `delbytag`
 
 Delete food items from WIFE by their specified tag(s).
 
@@ -387,29 +406,32 @@ Format: `delbytag n/TAG NAME [n/TAG NAME]...`
 
 Examples:
 
-`delbytag n/Healthy n/Dairy` returns
+`delbytag n/Fizzy` returns
 ```shell
 Deleted Food:
-Broccoli (expires on: 03-03-2033)
-Meiji Milk (expires on: 03-03-2033)
+Coca Cola (expires on: 01-01-2099)
 ```
+
+![DelByTag](images/UG/DelByTag.png)
 
 ### Delete tag(s) : `deltag`
 
 Deletes specified tags from WIFE. This command will delete all occurrences of the specified tags that are
-tagged to food items in the food list, if any.
+tagged to food items in the Food List, if any.
 
 Format: `deltag n/TAG NAME [n/TAG NAME]...`
 * `TAG NAME` must match an existing tag in WIFE.
 
 Examples:
 
-`deltag n/Healthy n/Dairy` returns
+`deltag n/Soup n/Fizzy` returns
 ```shell
 Tag successfully deleted:
-[Dairy]
-[Healthy]
+[Soup]
+[Fizzy]
 ```
+
+![DelTag](images/UG/DelTag.png)
 
 ## General Features
 
@@ -449,23 +471,21 @@ Format: `help [COMMAND_NAME]` where `COMMAND_NAME` may be omitted to view genera
 Example 1:
 `help` displays a general help message
 
-![AddFood](images/UG/Helpbox.png)
+![Help](images/UG/Help.png)
 
 Example 2:
 `help add` displays the command format and example usages specific to the `add` command
-```
-Add food item - add n/NAME u/UNIT q/QUANTITY e/EXPIRY DATE
-Example Usage: add n/Broccoli u/STALK q/2 e/03-03-2033
-```
+
+![HelpAdd](images/UG/HelpAdd.png)
 
 ### Clearing WIFE : `clear`
 
-Clears the entire food list in WIFE.
+Clears the entire Food List (`Food` and tags included) in WIFE.
 
 Format: `clear`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-This is a destructive command! Using this command will empty all food items and tags. Be careful when using this command!
+This is a _destructive command_! Using this command will empty all food items and tags. Be careful when using this command!
 </div>
 
 ### Exit the program : `exit`
@@ -493,15 +513,15 @@ If your changes to the data file makes its format invalid, WIFE will discard all
 ## FAQ
 
 **Q**: Can I use this application with other people? <br/>
-**A**: As of now, WIFE does not support concurrent users. If you would like to share your WIFE food list with another
+**A**: As of now, WIFE does not support concurrent users. If you would like to share your WIFE Food List with another
 user, install WIFE on their computer and overwrite their data file with the data file created by WIFE in your computer.
 
 **Q**: Can I use WIFE on mobile devices? <br/>
 **A**: As of now, WIFE is designed to only run on computers and laptops due to the usage of the Command Line Interface.
 There is no support for mobile devices yet.
 
-**Q**: Do I need to connect to wifi to use WIFE? <br/>
-**A**: No, you can use WIFE without a wifi connection.
+**Q**: Do I need to connect to Wi-Fi to use WIFE? <br/>
+**A**: No, you can use WIFE without a Wi-Fi connection.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
